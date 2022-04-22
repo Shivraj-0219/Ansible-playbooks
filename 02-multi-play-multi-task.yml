@@ -1,0 +1,30 @@
+---
+- name: Update web servers
+  hosts: web
+
+  tasks:
+  - name: Ensure web directory created
+    file:
+      path: /home/centos/web
+      state: directory
+
+  - name: Ensure config file downloaded
+    get_url:
+    dest: /home/centos/web
+      url: https://raw.githubusercontent.com/apache/tomcat/main/conf/server.xml
+
+- name: Update app servers
+  hosts: app
+
+  tasks:
+  - name: Ensure app directory created
+    file:
+      path: /home/centos/app
+      state: directory
+
+  - name: Ensure config file downloaded
+    get_url:
+      dest: /home/centos/app
+      url: https://raw.githubusercontent.com/apache/tomcat/main/conf/server.xml
+...
+

@@ -1,0 +1,20 @@
+---
+- name: Setup Apache HTTPD
+  hosts: centos
+  become: yes
+
+  tasks:
+  - name: Ensure Apache Config Updated
+    copy:
+      src: httpd.conf
+      dest: /etc/httpd/conf/httpd.conf
+- name: Ensure SELinux Permissive
+    selinux:
+      policy: targeted
+      state: permissive
+
+  - name: Restart Apache
+    service:
+      name: httpd
+      state: restarted
+...

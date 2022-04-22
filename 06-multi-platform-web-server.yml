@@ -1,0 +1,67 @@
+---
+- name: Setup Apache HTTPD
+  hosts: all
+  become: yes
+
+  tasks:
+  - name: Ensure APT Updated
+    apt:
+      update_cache: yes
+    when: ansible_distribution == "Ubuntu"
+
+  - name: Ensure Apache HTTP Installed
+    apt:
+      name: apache2
+      state: present
+    become: yes
+    when: ansible_distribution == "Ubuntu"
+
+  - name: Ensure Apache HTTP Started
+    service:
+      name: apache2
+      state: started
+    when: ansible_distribution == "Ubuntu"
+
+  - name: Ensure Apache HTTP Enabled
+    service:
+      name: apache2
+      enabled: yes
+    when: ansible_distribution == "Ubuntu"
+
+  - name: Ensure Apache HTTP Installed
+    yum:
+      name: httpd
+state: present
+    become: yes
+    when: ansible_distribution == "CentOS"
+
+  - name: Ensure Apache HTTP Started
+    service:
+      name: httpd
+      state: started
+    when: ansible_distribution == "CentOS"
+
+  - name: Ensure Apache HTTP Enabled
+    service:
+      name: httpd
+      enabled: yes
+    when: ansible_distribution == "CentOS"
+- name: Ensure Apache HTTP Installed
+    yum:
+      name: httpd
+      state: present
+    become: yes
+    when: ansible_distribution == "Amazon"
+
+  - name: Ensure Apache HTTP Started
+    service:
+      name: httpd
+      state: started
+    when: ansible_distribution == "Amazon"
+
+  - name: Ensure Apache HTTP Enabled
+    service:
+      name: httpd
+      enabled: yes
+    when: ansible_distribution == "Amazon"
+...

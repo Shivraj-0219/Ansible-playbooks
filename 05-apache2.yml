@@ -1,0 +1,25 @@
+---
+- name: Setup Apache HTTPD
+  hosts: ubuntu
+  become: yes
+
+  tasks:
+  - name: Ensure APT Updated
+    apt:
+      update_cache: yes
+
+  - name: Ensure Apache HTTP Installed
+    apt:
+      name: apache2
+      state: present
+    become: yes
+- name: Ensure Apache HTTP Started
+    service:
+      name: apache2
+      state: started
+
+  - name: Ensure Apache HTTP Enabled
+    service:
+      name: apache2
+      enabled: yes
+...
